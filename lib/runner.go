@@ -20,6 +20,7 @@ func GetCommand(name string, formula Formula) (Commands, error) {
 func Run(command Commands) error {
 	argCommands := strings.Split(command.Action, " ")
 	cmd := exec.Command(argCommands[0], argCommands[1:]...)
+  cmd.Stdin = os.Stdin
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
 	if err := cmd.Run(); err != nil {
